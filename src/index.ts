@@ -1,5 +1,6 @@
 import "./components/export"
 import { getApi } from "./service/getApi";
+import {AttributeBtn} from './components/btn/btn'
 
 class AppContainer extends HTMLElement {
     constructor(){
@@ -7,13 +8,19 @@ class AppContainer extends HTMLElement {
         this.attachShadow({mode: "open"})
     }
 
- connectedCallback() {
+ async connectedCallback() {
+    const attrs = 
         this.render()
     }
 
     render() {
-        const something = this.ownerDocument.createElement('app-card');
-        this.shadowRoot?.appendChild(something);
+        const buttons = this.ownerDocument.createElement('app-btn');
+        this.shadowRoot?.appendChild(buttons);
+      
+        const cardJoke = this.ownerDocument.createElement('app-card');
+        this.shadowRoot?.appendChild(cardJoke);
+
+
     }
 }
 

@@ -1,15 +1,15 @@
 import { getApi } from "../../service/getApi";
 
-export enum AttributeBtn{
-    "btn_text" = "btn_text"
+export enum AttributeCard{
+    "joke" = "joke"
 }
 
 export default class AppCard extends HTMLElement {
-    btn_text?:string;
+    joke?:string;
 
     static get observedAttributes(){
-        const attrs: Record<AttributeBtn, null> = {
-            btn_text: null
+        const attrs: Record<AttributeCard, null> = {
+            joke: null
         }
         return Object.keys(attrs)
     }
@@ -17,20 +17,27 @@ export default class AppCard extends HTMLElement {
         super();
         this.attachShadow({mode: "open"})
     }
+    
+    attributeChangeCallback(
+        propName:AttributeCard,
+        _:unknown,
+        newValue:string | undefined
+    ){
+        switch (propName) {
+            default:
+                this[propName] = newValue
+                break;
+        }
 
+    }
     async connectedCallback() {
-        const data = await getApi();
-        
-        data.forEach((array:any) => {
-            const btn = this.ownerDocument.createElement('button')
-            btn.setAttribute(AttributeBtn.btn_text, array.category)
-        });
         this.render()
     }
 
-    render() {
-        const something = this.ownerDocument.createElement('div');
-        this.shadowRoot?.appendChild(something);
+    async render() {
+        const cardJoke = this.ownerDocument.createElement('section')
+        const text = this.ownerDocument.createElement('h1')
+        text.innerText = `${this.joke}`
     }
 }
 

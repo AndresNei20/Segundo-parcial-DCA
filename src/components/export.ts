@@ -1,1 +1,1 @@
-export {default as AppCard} from './card/card'
+export {default as AppBtn} from './btn/btn'
